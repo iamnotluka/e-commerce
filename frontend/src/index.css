@@ -17,6 +17,10 @@ a:hover {
 	opacity: 0.8;
 }
 
+#root {
+	height: 100%;
+}
+
 .grid-container {
 	display: grid;
 	grid-template-areas:
@@ -161,4 +165,64 @@ a:hover {
 
 .sidebar-button:hover {
 	background: rgba(0, 0, 0, 0.124);
+}
+
+/* Product details */
+
+.details {
+	padding: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.details-image {
+	flex: 2 1 60rem;
+}
+
+.details-image img {
+	max-width: 60rem;
+	width: 100%;
+}
+
+.details-info {
+	flex: 2 1 30rem;
+}
+.details-action {
+	flex: 2 1 30rem;
+}
+
+.details-info ul,
+.details-action ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.details-info li,
+.details-action li {
+	margin: 1rem;
+}
+
+.back-to-result {
+	padding: 1rem;
+}
+
+.details-action {
+	border: 0.1rem grey solid;
+}
+
+.details-action ul li:last-child {
+	display: flex;
+	flex-direction: column;
+}
+
+.add-cart-button {
+	padding: 1rem;
+	border: 0.1rem black solid;
+	cursor: pointer;
+}
+
+.add-cart-button:hover {
+	opacity: 0.8;
 }

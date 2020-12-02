@@ -1,6 +1,7 @@
 export default {
 	products: [
 		{
+			_id: "123",
 			name: "Slim Shirt",
 			category: "Shirts",
 			image:
@@ -11,6 +12,7 @@ export default {
 			numReviews: 10,
 		},
 		{
+			_id: "124",
 			name: "Slim Shirt",
 			category: "Pants",
 			image:
@@ -21,6 +23,7 @@ export default {
 			numReviews: 10,
 		},
 		{
+			_id: "125",
 			name: "Slim Pants",
 			category: "Pants",
 			image:
