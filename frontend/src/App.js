@@ -1,13 +1,21 @@
 import "./App.css";
-import React, { useState } from "react";
-import data from "./data";
+import React, { useState, useEffect } from "react";
 import HomeScreen from "./components/HomeScreen";
 import ProductScreen from "./components/ProductScreen";
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import axios from "axios";
 
 function App() {
 	const [open, setOpen] = useState(false);
+	const [products, setProducts] = useState([]);
 
+	useEffect(() => {
+		const fetchData = async () => {
+			const { data } = await axios.get("/api/products");
+			setProducts(data);
+		};
+		fetchData();
+	});
 	return (
 		<BrowserRouter>
 			<div className="grid-container">
@@ -43,7 +51,12 @@ function App() {
 				<main className="main">
 					<div className="content">
 						<Route path="/products/:id" component={ProductScreen} />
-						<Route path="/" component={HomeScreen} exact={true} />
+						<Route
+							path="/"
+							exact={true}
+							products={products}
+							component={HomeScreen}
+						/>
 					</div>
 				</main>
 				<footer className="footer">All rights reserved.</footer>
