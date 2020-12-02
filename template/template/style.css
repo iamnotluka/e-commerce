@@ -1,0 +1,163 @@
+html {
+	font-size: 62.5%;
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 1.6rem;
+	height: 100vh;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	opacity: 0.8;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-areas:
+		"header"
+		"main"
+		"footer";
+	grid-template-columns: 1fr;
+	grid-template-rows: 5rem 1fr 5rem;
+	height: 100%;
+}
+
+.header {
+	grid-area: header;
+	background-color: black;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.brand a {
+	color: white;
+	font-size: 2.5rem;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.header-links a {
+	color: white;
+	text-decoration: none;
+}
+
+.header-links a:hover {
+	color: rgb(33, 127, 199);
+}
+
+.main {
+	grid-area: main;
+}
+
+.footer {
+	grid-area: footer;
+	background-color: black;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Home screen */
+.products {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.products li {
+	list-style-type: none;
+	padding: 0;
+	flex: 0 1 34rem;
+	margin: 1rem;
+	height: 45rem;
+	border-bottom: 0.1rem black solid;
+}
+
+.product {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.product-name {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.product-name a {
+	color: black;
+}
+
+.product-name a:hover {
+	color: rgb(33, 127, 199);
+}
+
+.product-brand {
+	font-size: 1.2rem;
+	color: lightslategrey;
+}
+
+.product-price {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.product-image {
+	object-fit: cover;
+	max-width: 34rem;
+	max-height: 34rem;
+}
+
+.product-rating {
+	margin-bottom: 1rem;
+}
+
+/* Side bar */
+.brand button {
+	font-size: 3rem;
+	padding: 0.5rem;
+	background: none;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+.sidebar {
+	position: fixed;
+	transform: translateX(-30rem);
+	width: 30rem;
+	background: rgb(223, 223, 223);
+	height: 100%;
+}
+
+.sidebar.open {
+	transform: translateX(0);
+}
+
+.sidebar-button {
+	width: 3rem;
+	height: 3rem;
+	padding: 0.5rem;
+	border: none;
+	outline: none;
+	background: none;
+	cursor: pointer;
+	position: absolute;
+	right: 0.5rem;
+	top: 1.5rem;
+}
+
+.sidebar-button:hover {
+	background: rgba(0, 0, 0, 0.124);
+}
