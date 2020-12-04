@@ -13,17 +13,16 @@ const ProductScreen = (props) => {
   if (product && product.stockCount > 0) {
     inStock = true;
   }
-  console.log(inStock);
 
   useEffect(() => {
     dispatch(detailsProduct(props.match.params.id));
-    setQty(product.stockCount);
     return () => {};
   }, []);
 
   const handleAddToCart = () => {
     props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
   };
+
   return (
     <div>
       <div className="back-to-result">
@@ -75,7 +74,9 @@ const ProductScreen = (props) => {
                   }}
                 >
                   {[...Array(product.stockCount).keys()].map((x) => (
-                    <option value={x + 1}>{x + 1}</option>
+                    <option key={x + 1} value={x + 1}>
+                      {x + 1}
+                    </option>
                   ))}
                 </select>
               </li>

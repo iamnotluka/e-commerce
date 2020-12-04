@@ -16,7 +16,7 @@ function App() {
       setProducts(data);
     };
     fetchData();
-  });
+  }, []);
   return (
     <BrowserRouter>
       <div className="grid-container">
