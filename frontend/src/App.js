@@ -8,6 +8,7 @@ import SigninScreen from "./components/SigninScreen";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from "axios";
+import RegisterScreen from "./components/RegisterScreen";
 
 function App() {
 	const [open, setOpen] = useState(false);
@@ -61,7 +62,7 @@ function App() {
 				<main className="main">
 					<div className="content">
 						<Route path="/signin" component={SigninScreen} />
-
+						<Route path="/register" component={RegisterScreen} />
 						<Route path="/products/:id" component={ProductScreen} />
 						<Route
 							path="/"
