@@ -4,8 +4,6 @@ import Product from "../models/productModel";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-	console.log("Product posting");
-	console.log("req.body", req.body);
 	const product = new Product({
 		name: req.body.name,
 		price: req.body.price,
@@ -28,7 +26,6 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-	console.log("Returning all products.");
 	const products = await Product.find({});
 	res.send(products);
 });
