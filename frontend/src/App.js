@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 
 import HomeScreen from "./components/HomeScreen";
+import ProductsEditScreen from "./components/ProductEditScreen";
 import ProductScreen from "./components/ProductScreen";
 import CartScreen from "./components/CartScreen";
 import SigninScreen from "./components/SigninScreen";
@@ -23,6 +24,7 @@ function App() {
 		};
 		fetchData();
 	}, []);
+
 	return (
 		<BrowserRouter>
 			<div className="grid-container">
@@ -33,7 +35,7 @@ function App() {
 						<Link to="/">Emporium</Link>
 					</div>
 					<div className="header-links">
-						<a href="cart.html">Cart</a>
+						<Link to="/cart">Cart</Link>
 						{userInfo ? (
 							<Link to="/profile">{userInfo.name}</Link>
 						) : (
@@ -61,9 +63,14 @@ function App() {
 				</aside>
 				<main className="main">
 					<div className="content">
+						<Route
+							path="/products"
+							exact={true}
+							component={ProductsEditScreen}
+						/>
 						<Route path="/signin" component={SigninScreen} />
 						<Route path="/register" component={RegisterScreen} />
-						<Route path="/products/:id" component={ProductScreen} />
+						<Route path="/product/:id" component={ProductScreen} />
 						<Route
 							path="/"
 							exact={true}

@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import {
 	productListReducer,
 	productDetailsReducer,
+	saveProductReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import thunk from "redux-thunk";
@@ -22,9 +23,9 @@ const reducer = combineReducers({
 	cart: cartReducer,
 	userSignin: userSigninReducer,
 	userRegister: userRegisterReducer,
+	saveProduct: saveProductReducer,
 });
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
 	reducer,
 	initialState,
