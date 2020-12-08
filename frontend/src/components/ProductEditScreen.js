@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { listProducts, productSave } from "../actions/productActions";
+import {
+	listProducts,
+	productSave,
+	deleteProduct,
+} from "../actions/productActions";
 
 const ProductEditScreen = (props) => {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -11,6 +15,7 @@ const ProductEditScreen = (props) => {
 	const [category, setCategory] = useState("");
 	const [stockCount, setStockCount] = useState("");
 	const [description, setDescription] = useState("");
+	const [id, setId] = useState("");
 
 	const saveProduct = useSelector((state) => state.saveProduct);
 	const { loadingSave, successSave, errorSave } = saveProduct;
@@ -18,16 +23,28 @@ const ProductEditScreen = (props) => {
 	const productList = useSelector((state) => state.productList);
 	const { loading, products, error } = productList;
 
+	const productDelete = useSelector((state) => state.productDelete);
+	const {
+		loadingDelete,
+		success: successDelete,
+		errorDelete,
+	} = productDelete;
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		console.log(successSave);
+		if (successSave) {
+			setModalVisible(false);
+		}
 		dispatch(listProducts());
-	}, []);
+	}, [successSave, successDelete]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
 		dispatch(
 			productSave({
+				_id: id,
 				name,
 				price,
 				image,
@@ -39,13 +56,22 @@ const ProductEditScreen = (props) => {
 		);
 	};
 
+	const deleteHandler = (product) => {
+		dispatch(deleteProduct(product._id));
+	};
+
 	const openModal = (product) => {
 		setModalVisible(true);
-		setPrice(product.price);
-		setImage(product.image);
-		setBrand(product.brand);
-		setCategory(product.category);
-		setStockCount(product.stockCount);
+		if (product) {
+			setName(product.name);
+			setPrice(product.price);
+			setImage(product.image);
+			setBrand(product.brand);
+			setCategory(product.category);
+			setStockCount(product.stockCount);
+			setId(product._id);
+			setDescription(product.description);
+		}
 	};
 
 	return (
@@ -66,6 +92,7 @@ const ProductEditScreen = (props) => {
 							<li>
 								<label htmlFor="name">Name</label>
 								<input
+									value={name}
 									type="text"
 									id="name"
 									name="name"
@@ -75,6 +102,7 @@ const ProductEditScreen = (props) => {
 							<li>
 								<label htmlFor="price">Price</label>
 								<input
+									value={price}
 									type="text"
 									id="price"
 									name="price"
@@ -84,6 +112,7 @@ const ProductEditScreen = (props) => {
 							<li>
 								<label htmlFor="image">Image</label>
 								<input
+									value={image}
 									type="text"
 									id="image"
 									name="image"
@@ -93,6 +122,7 @@ const ProductEditScreen = (props) => {
 							<li>
 								<label htmlFor="brand">Brand</label>
 								<input
+									value={brand}
 									type="text"
 									id="brand"
 									name="brand"
@@ -102,6 +132,7 @@ const ProductEditScreen = (props) => {
 							<li>
 								<label htmlFor="category">Category</label>
 								<input
+									value={category}
 									type="text"
 									id="category"
 									name="category"
@@ -113,6 +144,7 @@ const ProductEditScreen = (props) => {
 							<li>
 								<label htmlFor="stockCount">Stock count</label>
 								<input
+									value={stockCount}
 									type="text"
 									id="stockCount"
 									name="stockCount"
@@ -124,6 +156,7 @@ const ProductEditScreen = (props) => {
 							<li>
 								<label htmlFor="description">Description</label>
 								<textarea
+									value={description}
 									type="text"
 									id="description"
 									name="description"
@@ -136,12 +169,22 @@ const ProductEditScreen = (props) => {
 								<button
 									type="submit"
 									className="button primary">
-									Create
+									{id ? "Update" : "Create"}
 								</button>
 							</li>
 							<li>
 								<button
-									onClick={() => setModalVisible(false)}
+									onClick={() => {
+										setModalVisible(false);
+										setId(null);
+										setName("");
+										setPrice("");
+										setImage("");
+										setBrand("");
+										setCategory("");
+										setStockCount("");
+										setDescription("");
+									}}
 									className="button">
 									Back
 								</button>
@@ -150,7 +193,7 @@ const ProductEditScreen = (props) => {
 					</form>
 				</div>
 			) : (
-				<div>Not visible modal</div>
+				<div></div>
 			)}
 			<div className="product-list">
 				<table>
@@ -176,7 +219,10 @@ const ProductEditScreen = (props) => {
 									<button onClick={() => openModal(product)}>
 										Edit
 									</button>
-									<button>Delete</button>
+									<button
+										onClick={() => deleteHandler(product)}>
+										Delete
+									</button>
 								</td>
 							</tr>
 						))}

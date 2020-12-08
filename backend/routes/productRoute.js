@@ -1,7 +1,29 @@
-import express from "express";
+import express, { Router } from "express";
 import Product from "../models/productModel";
 
 const router = express.Router();
+
+router.put("/:id", async (req, res) => {
+	const productId = req.params.id;
+	const product = await Product.findById(productId);
+
+	if (product) {
+		product.name = req.body.name;
+		product.price = req.body.price;
+		product.image = req.body.image;
+		product.brand = req.body.brand;
+		product.category = req.body.category;
+		product.stockCount = req.body.stockCount;
+		product.description = req.body.description;
+		const updatedProduct = await product.save();
+		if (updatedProduct) {
+			return res
+				.status(200)
+				.send({ message: "Product Updated", data: updatedProduct });
+		}
+	}
+	return res.status(500).send({ message: "Error Updating Product" });
+});
 
 router.post("/", async (req, res) => {
 	const product = new Product({
@@ -28,6 +50,20 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
 	const products = await Product.find({});
 	res.send(products);
+});
+
+router.delete("/:id", async (req, res) => {
+	console.log("deleting");
+	const productId = req.params.id;
+	console.log(productId);
+	const deletedProduct = Product.findById(productId);
+
+	if (deletedProduct) {
+		await deletedProduct.remove();
+		res.send({ message: "Product Deleted" });
+	} else {
+		res.send("Errpr om Deletion.");
+	}
 });
 
 export default router;

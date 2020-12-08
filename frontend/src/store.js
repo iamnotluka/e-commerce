@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import {
 	productListReducer,
 	productDetailsReducer,
+	productDeleteReducer,
 	saveProductReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
@@ -24,6 +25,7 @@ const reducer = combineReducers({
 	userSignin: userSigninReducer,
 	userRegister: userRegisterReducer,
 	saveProduct: saveProductReducer,
+	productDelete: productDeleteReducer,
 });
 
 const store = createStore(
