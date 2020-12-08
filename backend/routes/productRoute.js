@@ -21,6 +21,7 @@ router.put("/:id", async (req, res) => {
 				.status(200)
 				.send({ message: "Product Updated", data: updatedProduct });
 		}
+	} else {
 	}
 	return res.status(500).send({ message: "Error Updating Product" });
 });

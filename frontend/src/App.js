@@ -70,7 +70,7 @@ function App() {
 						/>
 						<Route path="/signin" component={SigninScreen} />
 						<Route path="/register" component={RegisterScreen} />
-						<Route path="/product/:id" component={ProductScreen} />
+						<Route path="/products/:id" component={ProductScreen} />
 						<Route
 							path="/"
 							exact={true}

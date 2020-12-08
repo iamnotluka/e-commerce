@@ -47,7 +47,7 @@ const CartScreen = (props) => {
 									<img src={item.image} alt={item.name} />
 								</div>
 								<div className="cart-name">
-									<Link to={"/product/" + item.product}>
+									<Link to={"/products/" + item.product}>
 										{item.name}
 									</Link>
 									<div>
