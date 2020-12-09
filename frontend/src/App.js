@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from "axios";
 import RegisterScreen from "./components/RegisterScreen";
+import router from "../../backend/routes/productRoute";
+import ShippingScreen from "./components/ShippingScreen";
 
 function App() {
 	const [open, setOpen] = useState(false);
@@ -68,6 +70,7 @@ function App() {
 							exact={true}
 							component={ProductsEditScreen}
 						/>
+						<Route path="shipping" component={ShippingScreen} />
 						<Route path="/signin" component={SigninScreen} />
 						<Route path="/register" component={RegisterScreen} />
 						<Route path="/products/:id" component={ProductScreen} />

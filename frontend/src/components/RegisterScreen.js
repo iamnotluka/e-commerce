@@ -11,10 +11,13 @@ const RegisterScreen = (props) => {
 	const [rePassword, setRePassword] = useState("");
 	const userRegister = useSelector((state) => state.userRegister);
 	const { loading, userInfo, error } = userRegister;
+	const redirect = props.location.search
+		? props.location.search.split("=")[1]
+		: "/";
 
 	useEffect(() => {
 		if (userInfo) {
-			props.history.push("/");
+			props.history.push(redirect);
 		}
 	}, [userInfo]);
 
@@ -76,7 +79,11 @@ const RegisterScreen = (props) => {
 					<li>Already have an account?</li>
 					<li>
 						<Link
-							to="/signin"
+							to={
+								redirect === "/"
+									? "/signin"
+									: "signin?redirect=" + redirect
+							}
 							className="button primary text-center">
 							Sign-in
 						</Link>

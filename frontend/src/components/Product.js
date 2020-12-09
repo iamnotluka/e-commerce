@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
 	return (
-		<li key={product._id} className="product">
+		<div>
 			<Link to={`/products/${product._id}`}>
 				<img
 					className="product-image"
@@ -19,7 +19,7 @@ const Product = ({ product }) => {
 			<div className="product-rating">
 				{product.rating} Stars ({product.numReviews} Reviews)
 			</div>
-		</li>
+		</div>
 	);
 };
 
