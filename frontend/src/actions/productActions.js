@@ -26,15 +26,28 @@ const listProducts = () => async (dispatch) => {
 };
 
 const productSave = (product) => async (dispatch, getState) => {
+	const {
+		userSignin: { userInfo },
+	} = getState();
+	console.log(userInfo);
 	try {
 		dispatch({ type: PRODUCT_SAVE_REQUEST, payload: product });
 		if (!product._id) {
-			const { data } = await Axios.post("/api/products", product);
+			const { data } = await Axios.post("/api/products", product, {
+				headers: {
+					Authorization: "Bearer " + userInfo.token,
+				},
+			});
 			dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
 		} else {
 			const { data } = await Axios.put(
 				"/api/products/" + product._id,
-				product
+				product,
+				{
+					headers: {
+						Authorization: "Bearer " + userInfo.token,
+					},
+				}
 			);
 			dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
 		}
@@ -54,10 +67,19 @@ const detailsProduct = (productId) => async (dispatch) => {
 };
 
 const deleteProduct = (productId) => async (dispatch, getState) => {
+	const {
+		userSignin: { userInfo },
+	} = getState();
+	console.log(userInfo);
+
 	try {
 		dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
 		console.log("doing this delete");
-		const { data } = await Axios.delete("/api/products/" + productId);
+		const { data } = await Axios.delete("/api/products/" + productId, {
+			headers: {
+				Authorization: "Bearer " + userInfo.token,
+			},
+		});
 
 		dispatch({
 			type: PRODUCT_DELETE_SUCCESS,

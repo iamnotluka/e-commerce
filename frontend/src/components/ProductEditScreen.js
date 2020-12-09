@@ -78,7 +78,9 @@ const ProductEditScreen = (props) => {
 		<div className="content content-margined">
 			<div className="product-header">
 				<h3>Products</h3>
-				<button onClick={() => openModal()}>Create Product</button>
+				<button className="button primary" onClick={() => openModal()}>
+					Create Product
+				</button>
 			</div>
 			{modalVisible ? (
 				<div className="form">
@@ -196,7 +198,7 @@ const ProductEditScreen = (props) => {
 				<div></div>
 			)}
 			<div className="product-list">
-				<table>
+				<table className="table">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -209,17 +211,20 @@ const ProductEditScreen = (props) => {
 					</thead>
 					<tbody>
 						{products.map((product) => (
-							<tr>
+							<tr key={product._id}>
 								<td>{product._id}</td>
 								<td>{product.name}</td>
 								<td>{product.price}</td>
 								<td>{product.category}</td>
 								<td>{product.brand}</td>
 								<td>
-									<button onClick={() => openModal(product)}>
-										Edit
-									</button>
 									<button
+										className="button"
+										onClick={() => openModal(product)}>
+										Edit
+									</button>{" "}
+									<button
+										className="button"
 										onClick={() => deleteHandler(product)}>
 										Delete
 									</button>
